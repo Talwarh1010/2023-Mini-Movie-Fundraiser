@@ -1,13 +1,3 @@
-def yes_no(question):
-    while True:
-        response = input(question).lower()
-        if response == "yes" or response == "y":
-            return response
-        elif response == "no" or response == "n":
-            return response
-        else:
-            print("Please enter yes or no")
-
 
 def not_blank(question):
     while True:
@@ -28,9 +18,28 @@ def num_check(question):
             print("Please enter an integer.")
 
 
+def calc_ticket_price(var_age):
+    if var_age < 16:
+        price = 7.5
+    elif var_age < 65:
+        price = 10.5
+    else:
+        price = 6.5
+    return price
+
+
+def string_checker(question, num_letters, valid_responses):
+    while True:
+        response = input(question).lower()
+        for item in valid_responses:
+            if response == item[:num_letters] or response == item:
+                return item
+        print(f"Please choose {valid_responses[0]} or {valid_responses[1]}")
+
+
 MAX_TICKETS = 3
 tickets_sold = 0
-want_instructions = yes_no("Do you want to read the instructions? ")
+want_instructions = string_checker("Do you want to read the instructions? ", num_letters=0, valid_responses=["yes", "no"])
 
 if want_instructions == "yes" or want_instructions == "y":
     print("Instructions go here")
@@ -52,6 +61,9 @@ while tickets_sold < MAX_TICKETS:
         print("?? That looks like a typo, please try again.")
         print()
         continue
+    
+    ticket_cost = round(calc_ticket_price(age),2)
+    pay_method = string_checker("How would you like to pay: ", num_letters = 2, valid_responses = ["cash", "credit"])
     
     tickets_sold += 1
 if tickets_sold == MAX_TICKETS:
