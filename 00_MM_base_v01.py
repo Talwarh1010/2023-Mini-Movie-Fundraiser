@@ -94,12 +94,12 @@ want_instructions = string_checker("Do you want to read the instructions? ", num
 # Shows instructions to user if they said "yes" or "y"
 if want_instructions == "yes" or want_instructions == "y":
     show_instructions()
-print()
+
 
 # Loop which stops when the maximum number of tickets is reached or when user enters "xxx"
 while tickets_sold < MAX_TICKETS:
+    print()
     name = not_blank("Please enter your name or 'xxx' to quit: ")
-
     if name == 'xxx' and len(all_names) > 0:
         break
     elif name == 'xxx':
@@ -124,16 +124,16 @@ while tickets_sold < MAX_TICKETS:
 
     if pay_method == "cash":
         surcharge = 0
-else:
-    surcharge = ticket_cost * 0.05
+    else:
+        surcharge = ticket_cost * 0.05
 
-# Increment the number of tickets sold
-tickets_sold += 1
-
-# Add ticket details to empty lists
-all_names.append(name)
-all_ticket_costs.append(ticket_cost)
-all_surcharge.append(surcharge)
+    # Increment the number of tickets sold
+    tickets_sold += 1
+    
+    # Add ticket details to empty lists
+    all_names.append(name)
+    all_ticket_costs.append(ticket_cost)
+    all_surcharge.append(surcharge)
 
 # Create a DataFrame to hold the ticket details
 mini_movie_frame = pandas.DataFrame(mini_movie_dict)
